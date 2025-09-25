@@ -13,17 +13,18 @@ export class DebugLogger {
         this.startTime = Date.now();
         this.errorCount = 0;
         this.warningCount = 0;
-        
+
         // Initialize error tracking
         this.initializeErrorTracking();
-        
+
         console.log(`Debug Logger initialized (Session: ${this.sessionId})`);
     }
 
     /**
      * Generate unique session ID
      * @returns {string} Unique session identifier  
-  generateSessionId() {
+     */
+    generateSessionId() {
         return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
     }
 
@@ -33,12 +34,12 @@ export class DebugLogger {
      */
     determineLogLevel() {
         // Check if we're in development mode
-        if (window.location.hostname === 'localhost' || 
-            window.location.hostname === '127.0.0.1' || 
+        if (window.location.hostname === 'localhost' ||
+            window.location.hostname === '127.0.0.1' ||
             window.location.search.includes('debug=true')) {
             return 'debug';
         }
-        
+
         // Production mode - less verbose logging
         return 'info';
     }
@@ -94,7 +95,7 @@ export class DebugLogger {
 
         // Add to logs array
         this.logs.push(logEntry);
-        
+
         // Maintain max logs limit
         if (this.logs.length > this.maxLogs) {
             this.logs.shift();
@@ -122,7 +123,7 @@ export class DebugLogger {
         const levels = { debug: 0, info: 1, warn: 2, error: 3 };
         const currentLevel = levels[this.logLevel] || 1;
         const messageLevel = levels[level] || 1;
-        
+
         return messageLevel >= currentLevel;
     }
 
@@ -133,7 +134,7 @@ export class DebugLogger {
     outputToConsole(logEntry) {
         const { level, message, data, timestamp } = logEntry;
         const timeStr = new Date(timestamp).toLocaleTimeString();
-        
+
         switch (level) {
             case 'debug':
                 console.debug(`🐛 [${timeStr}] ${message}`, data);
@@ -161,12 +162,12 @@ export class DebugLogger {
             const storageKey = `debugLogs_${this.sessionId}`;
             const existingLogs = JSON.parse(localStorage.getItem(storageKey) || '[]');
             existingLogs.push(logEntry);
-            
+
             // Keep only last 100 entries in localStorage
             if (existingLogs.length > 100) {
                 existingLogs.splice(0, existingLogs.length - 100);
             }
-            
+
             localStorage.setItem(storageKey, JSON.stringify(existingLogs));
         } catch (error) {
             // Ignore localStorage errors (e.g., quota exceeded)
@@ -301,7 +302,7 @@ export class DebugLogger {
         this.logs = [];
         this.errorCount = 0;
         this.warningCount = 0;
-        
+
         // Clear localStorage logs
         try {
             const storageKey = `debugLogs_${this.sessionId}`;
@@ -309,7 +310,7 @@ export class DebugLogger {
         } catch (error) {
             // Ignore localStorage errors
         }
-        
+
         this.info('Logs cleared');
     }
 
@@ -332,12 +333,12 @@ export class DebugLogger {
      */
     testLogging() {
         console.group('🧪 Testing Debug Logger');
-        
+
         this.debug('Debug message test', { testData: 'debug' });
         this.info('Info message test', { testData: 'info' });
         this.warn('Warning message test', { testData: 'warning' });
         this.logError('Error message test', { testData: 'error' });
-        
+
         console.log('Session Stats:', this.getSessionStats());
         console.groupEnd();
     }
