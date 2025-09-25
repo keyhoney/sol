@@ -1,0 +1,1100 @@
+/* Component Styles - Placeholder */
+/* This file will be implemented in tasks 2.2 and 2.3 */
+
+/* Header Components */
+/* 드롭다운 선택기들의 고급스러운 스타일 구현 */
+/* 호버 효과 및 포커스 상태 스타일링 */
+
+.header {
+  background-color: var(--color-background);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  padding: var(--spacing-6) 0;
+}
+
+.header__title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  text-align: center;
+  margin-bottom: var(--spacing-6);
+  line-height: var(--line-height-tight);
+}
+
+.header__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-4);
+  align-items: end;
+  justify-content: center;
+}
+
+/* Select Group Components */
+.select-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  min-width: 140px;
+}
+
+.select-group__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-1);
+}
+
+.select-group__select {
+  appearance: none;
+  background-color: var(--color-background);
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236d5d4f' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+  background-position: right var(--spacing-3) center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  padding: var(--spacing-3) var(--spacing-10) var(--spacing-3) var(--spacing-3);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  min-height: 44px; /* 접근성을 위한 최소 터치 영역 */
+}
+
+.select-group__select:hover:not(:disabled) {
+  border-color: var(--color-secondary);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+.select-group__select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.1);
+}
+
+.select-group__select:disabled {
+  background-color: var(--color-light);
+  border-color: var(--color-border);
+  color: var(--color-text-light);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.select-group__select:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Button Components */
+/* 고급스러운 버튼 스타일과 호버 효과 */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3) var(--spacing-5);
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  user-select: none;
+  white-space: nowrap;
+  min-height: 44px; /* 접근성을 위한 최소 터치 영역 */
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.2);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn--primary {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  border-color: var(--color-primary);
+}
+
+.btn--primary:hover:not(:disabled) {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn--primary:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn--secondary {
+  background-color: var(--color-background);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.btn--secondary:hover:not(:disabled) {
+  background-color: var(--color-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn--secondary:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn--icon {
+  padding: var(--spacing-2);
+  min-width: 44px;
+  min-height: 44px;
+  background-color: var(--color-light);
+  color: var(--color-accent);
+  border-color: var(--color-border);
+}
+
+.btn--icon:hover:not(:disabled) {
+  background-color: var(--color-secondary);
+  color: var(--color-background);
+  border-color: var(--color-secondary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn--icon:active {
+  transform: translateY(0);
+}
+
+/* Responsive Header Design */
+@media (max-width: 767px) {
+  .header {
+    padding: var(--spacing-4) 0;
+  }
+  
+  .header__title {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-4);
+  }
+  
+  .header__controls {
+    flex-direction: column;
+    gap: var(--spacing-3);
+    align-items: stretch;
+  }
+  
+  .select-group {
+    min-width: auto;
+  }
+  
+  .select-group__select {
+    font-size: var(--font-size-base);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .header__controls {
+    gap: var(--spacing-3);
+  }
+  
+  .select-group {
+    min-width: 120px;
+  }
+}
+
+@media (min-width: 992px) {
+  .header__controls {
+    gap: var(--spacing-5);
+  }
+  
+  .select-group {
+    min-width: 160px;
+  }
+}
+
+/* Main Content Components */
+/* 문제 이미지 표시 영역 스타일링 */
+/* 로딩 스피너 및 오류 메시지 스타일 */
+/* 모바일, 태블릿, 데스크톱 반응형 구현 */
+
+.main {
+  flex: 1;
+  padding: var(--spacing-8) 0;
+  min-height: calc(100vh - 200px); /* 헤더와 푸터 공간 확보 */
+}
+
+.problem-section {
+  margin-bottom: var(--spacing-8);
+}
+
+.problem-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-6);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.problem-image-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-light);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-6);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+}
+
+.problem-image-container:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.problem-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+}
+
+.problem-image:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Solution Controls */
+.solution-controls {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Loading and Error Components */
+/* 로딩 스피너 및 오류 메시지 스타일 */
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-8);
+  color: var(--color-text-light);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--color-border);
+  border-top: 4px solid var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-6);
+  background-color: rgba(244, 67, 54, 0.1);
+  border: 2px solid var(--color-error);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  animation: errorSlideIn 0.3s ease-out;
+}
+
+.error-message__text {
+  color: var(--color-error);
+  font-weight: var(--font-weight-medium);
+  margin: 0;
+  line-height: 1.5;
+}
+
+@keyframes errorSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced Error States */
+.error-message--network {
+  background-color: rgba(255, 152, 0, 0.1);
+  border-color: #ff9800;
+}
+
+.error-message--network .error-message__text {
+  color: #ff9800;
+}
+
+.error-message--file-not-found {
+  background-color: rgba(156, 39, 176, 0.1);
+  border-color: #9c27b0;
+}
+
+.error-message--file-not-found .error-message__text {
+  color: #9c27b0;
+}
+
+/* PDF Error Styling */
+.pdf-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-6);
+  background-color: rgba(244, 67, 54, 0.1);
+  border: 2px solid var(--color-error);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  margin: var(--spacing-4);
+}
+
+.pdf-error .error-message__text {
+  color: var(--color-error);
+  font-weight: var(--font-weight-medium);
+  margin: 0;
+}
+
+/* Temporary Message Styling */
+.temp-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: var(--spacing-4) var(--spacing-6);
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-medium);
+  box-shadow: var(--shadow-lg);
+  z-index: 1000;
+  max-width: 400px;
+  animation: messageSlideIn 0.3s ease-out;
+  transition: all var(--transition-normal);
+  word-wrap: break-word;
+  line-height: 1.4;
+}
+
+.temp-message--success {
+  background-color: #4caf50;
+  color: white;
+  border: 2px solid #45a049;
+}
+
+.temp-message--error {
+  background-color: #f44336;
+  color: white;
+  border: 2px solid #d32f2f;
+}
+
+.temp-message--warning {
+  background-color: #ff9800;
+  color: white;
+  border: 2px solid #f57c00;
+}
+
+.temp-message--info {
+  background-color: #2196f3;
+  color: white;
+  border: 2px solid #1976d2;
+}
+
+@keyframes messageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Enhanced Loading States */
+.loading-spinner--enhanced {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-8);
+  color: var(--color-text-light);
+  background-color: var(--color-light);
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--color-border);
+}
+
+.loading-spinner--enhanced .spinner {
+  width: 48px;
+  height: 48px;
+  border-width: 5px;
+}
+
+.loading-spinner--enhanced p {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+  margin: 0;
+}
+
+/* Network Status Indicator */
+.network-status {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  z-index: 1000;
+  transition: all var(--transition-normal);
+}
+
+.network-status--online {
+  background-color: #4caf50;
+  color: white;
+  border: 2px solid #45a049;
+}
+
+.network-status--offline {
+  background-color: #f44336;
+  color: white;
+  border: 2px solid #d32f2f;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Enhanced Error Messages with Retry Options */
+.error-message--with-retry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-6);
+  background-color: rgba(244, 67, 54, 0.1);
+  border: 2px solid var(--color-error);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  animation: errorSlideIn 0.3s ease-out;
+}
+
+.error-message--with-retry .error-actions {
+  display: flex;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.error-message--with-retry .btn--retry {
+  background-color: var(--color-primary);
+  color: white;
+  border: 2px solid var(--color-primary);
+  font-size: var(--font-size-sm);
+  padding: var(--spacing-2) var(--spacing-4);
+}
+
+.error-message--with-retry .btn--retry:hover {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+/* Progress Indicator for Loading */
+.loading-progress {
+  width: 100%;
+  max-width: 300px;
+  height: 4px;
+  background-color: var(--color-border);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-top: var(--spacing-2);
+}
+
+.loading-progress__bar {
+  height: 100%;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-full);
+  transition: width var(--transition-normal);
+  animation: progressPulse 2s ease-in-out infinite;
+}
+
+@keyframes progressPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Timeout Warning */
+.timeout-warning {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3) var(--spacing-4);
+  background-color: rgba(255, 152, 0, 0.1);
+  border: 1px solid #ff9800;
+  border-radius: var(--radius-md);
+  color: #f57c00;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  margin-top: var(--spacing-3);
+}
+
+.timeout-warning::before {
+  content: "⏱️";
+  font-size: var(--font-size-base);
+}
+
+/* Retry Counter */
+.retry-counter {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-light);
+  margin-top: var(--spacing-2);
+  text-align: center;
+}
+
+.retry-counter::before {
+  content: "🔄 ";
+}
+
+/* Global Error Overlay Enhancements */
+.global-overlay--error .global-overlay__content {
+  background-color: rgba(244, 67, 54, 0.05);
+  border: 2px solid var(--color-error);
+}
+
+.error-icon {
+  font-size: 48px;
+  margin-bottom: var(--spacing-4);
+}
+
+/* Retry Button Styling */
+.btn--retry {
+  background-color: var(--color-primary);
+  color: white;
+  border: 2px solid var(--color-primary);
+  transition: all var(--transition-normal);
+}
+
+.btn--retry:hover {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+
+/* PDF Viewer Components */
+/* PDF 표시 및 컨트롤 스타일링 */
+
+.pdf-section {
+  margin-top: var(--spacing-8);
+  padding-top: var(--spacing-8);
+  border-top: 2px solid var(--color-border);
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.3s ease-out;
+}
+
+.pdf-section--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pdf-container {
+  background-color: var(--color-light);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.pdf-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-4) var(--spacing-6);
+  background-color: var(--color-background);
+  border-bottom: 1px solid var(--color-border);
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+}
+
+.pdf-header__title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.pdf-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+}
+
+.pdf-page-info {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+  padding: 0 var(--spacing-3);
+  white-space: nowrap;
+}
+
+.pdf-viewer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-6);
+  background-color: var(--color-background);
+  min-height: 400px;
+}
+
+.pdf-canvas {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-normal);
+}
+
+.pdf-canvas:hover {
+  box-shadow: var(--shadow-xl);
+}
+
+/* PDF Loading and Error States */
+.pdf-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-8);
+  color: var(--color-text-light);
+}
+
+.pdf-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-6);
+  background-color: rgba(244, 67, 54, 0.1);
+  border: 2px solid var(--color-error);
+  border-radius: var(--radius-md);
+  margin: var(--spacing-4);
+  text-align: center;
+}
+
+/* Footer Components */
+.footer {
+  background-color: var(--color-light);
+  border-top: 1px solid var(--color-border);
+  padding: var(--spacing-6) 0;
+  margin-top: auto;
+}
+
+.footer__text {
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+  margin: 0;
+}
+
+/* Responsive Design Implementation */
+/* 모바일, 태블릿, 데스크톱 반응형 구현 */
+
+/* Mobile Styles (< 768px) */
+@media (max-width: 767px) {
+  .main {
+    padding: var(--spacing-4) 0;
+  }
+  
+  .problem-container {
+    gap: var(--spacing-4);
+  }
+  
+  .problem-image-container {
+    padding: var(--spacing-4);
+  }
+  
+  .pdf-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-4);
+  }
+  
+  .pdf-header__title {
+    text-align: center;
+  }
+  
+  .pdf-controls {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .pdf-viewer {
+    padding: var(--spacing-4);
+    min-height: 300px;
+  }
+  
+  .btn--icon {
+    min-width: 40px;
+    min-height: 40px;
+    padding: var(--spacing-2);
+  }
+}
+
+/* Tablet Styles (768px - 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .problem-container {
+    max-width: 700px;
+  }
+  
+  .pdf-header {
+    padding: var(--spacing-5) var(--spacing-6);
+  }
+  
+  .pdf-viewer {
+    padding: var(--spacing-5);
+    min-height: 450px;
+  }
+}
+
+/* Desktop Styles (≥ 992px) */
+@media (min-width: 992px) {
+  .main {
+    padding: var(--spacing-10) 0;
+  }
+  
+  .problem-container {
+    max-width: 900px;
+    gap: var(--spacing-8);
+  }
+  
+  .problem-image-container {
+    padding: var(--spacing-8);
+  }
+  
+  .pdf-viewer {
+    min-height: 500px;
+  }
+}
+
+/* Large Desktop Styles (≥ 1200px) */
+@media (min-width: 1200px) {
+  .problem-container {
+    max-width: 1000px;
+  }
+  
+  .pdf-viewer {
+    min-height: 600px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .header,
+  .footer,
+  .pdf-controls,
+  .solution-controls {
+    display: none !important;
+  }
+  
+  .main {
+    padding: 0;
+  }
+  
+  .problem-image-container,
+  .pdf-container {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+  }
+  
+  .pdf-header {
+    border-bottom: 1px solid #000;
+    background: transparent;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .problem-image-container,
+  .pdf-container {
+    border-width: 3px;
+  }
+  
+  .btn {
+    border-width: 3px;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+  }
+  
+  .pdf-section {
+    animation: none;
+  }
+  
+  .problem-image:hover,
+  .pdf-canvas:hover {
+    transform: none;
+  }
+  
+  .btn:hover {
+    transform: none;
+  }
+}
+/*
+ Debug Panel Styles */
+.debug-panel {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 350px;
+    max-height: 80vh;
+    background: var(--color-white);
+    border: 2px solid var(--color-primary);
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+}
+
+.debug-panel__header {
+    background: var(--color-primary);
+    color: var(--color-white);
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.debug-panel__header h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.debug-panel__close {
+    background: none;
+    border: none;
+    color: var(--color-white);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+}
+
+.debug-panel__close:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.debug-panel__content {
+    padding: 15px;
+    max-height: calc(80vh - 60px);
+    overflow-y: auto;
+}
+
+.debug-section {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.debug-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.debug-section h4 {
+    margin: 0 0 10px 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.debug-section .btn {
+    margin: 2px 4px 2px 0;
+    padding: 4px 8px;
+    font-size: 11px;
+}
+
+.debug-results {
+    margin-top: 10px;
+    padding: 8px;
+    background: var(--color-light);
+    border-radius: 4px;
+    font-size: 11px;
+    max-height: 200px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.debug-stats {
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--color-text-secondary);
+}
+
+.debug-stats div {
+    margin: 2px 0;
+}
+
+.debug-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    transition: all 0.3s ease;
+}
+
+.debug-toggle:hover {
+    background: var(--color-primary-dark);
+    transform: scale(1.1);
+}
+
+.debug-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Debug mode indicator */
+body.debug-mode .debug-toggle,
+body.debug-mode .debug-panel {
+    display: block;
+}
+
+/* Mobile responsive debug panel */
+@media (max-width: 768px) {
+    .debug-panel {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        width: auto;
+        max-height: 70vh;
+    }
+    
+    .debug-toggle {
+        bottom: 10px;
+        right: 10px;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+}
+
+/* Debug results styling */
+.debug-results .test-pass {
+    color: #28a745;
+    font-weight: 600;
+}
+
+.debug-results .test-fail {
+    color: #dc3545;
+    font-weight: 600;
+}
+
+.debug-results .test-warning {
+    color: #ffc107;
+    font-weight: 600;
+}
+
+.debug-results .test-info {
+    color: #17a2b8;
+}
+
+/* Debug panel animations */
+.debug-panel.show {
+    animation: debugPanelSlideIn 0.3s ease-out;
+}
+
+.debug-panel.hide {
+    animation: debugPanelSlideOut 0.3s ease-in;
+}
+
+@keyframes debugPanelSlideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes debugPanelSlideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
