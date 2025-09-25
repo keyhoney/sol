@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="수학 기출문제 풀이 웹앱 - 학년도별 문제와 해설을 제공합니다">
+    <meta name="keywords" content="수학, 기출문제, 문제풀이, 해설, 학습">
+    <meta name="author" content="Math Problem Solver">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="수학 기출문제 풀이 웹앱">
+    <meta property="og:description" content="학년도별 수학 기출문제와 상세한 해설을 제공하는 학습 도구">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    
+    <title>수학 기출문제 풀이 웹앱</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    
+    <!-- External Libraries CDN -->
+    <!-- Papa Parse for CSV parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    
+    <!-- PDF.js for PDF rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
+</head>
+<body>
+    <!-- Global Loading Overlay -->
+    <div id="global-loading" class="global-overlay hidden">
+        <div class="global-overlay__content">
+            <div class="spinner"></div>
+            <p id="global-loading-text">애플리케이션을 초기화하는 중...</p>
+        </div>
+    </div>
+
+    <!-- Global Error Overlay -->
+    <div id="global-error" class="global-overlay global-overlay--error hidden">
+        <div class="global-overlay__content">
+            <div class="error-icon">⚠️</div>
+            <h2>오류가 발생했습니다</h2>
+            <p id="global-error-text">애플리케이션을 초기화할 수 없습니다.</p>
+            <button id="global-retry-btn" class="btn btn--primary">다시 시도</button>
+        </div>
+    </div>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <!-- Selection Controls -->
+            <div class="header__controls">
+                <div class="select-group">
+                    <label for="year-select" class="select-group__label">학년도</label>
+                    <select id="year-select" class="select-group__select" disabled>
+                        <option value="">학년도 선택</option>
+                    </select>
+                </div>
+                
+                <div class="select-group">
+                    <label for="month-select" class="select-group__label">시행월</label>
+                    <select id="month-select" class="select-group__select" disabled>
+                        <option value="">시행월 선택</option>
+                    </select>
+                </div>
+                
+                <div class="select-group">
+                    <label for="question-select" class="select-group__label">문항번호</label>
+                    <select id="question-select" class="select-group__select" disabled>
+                        <option value="">문항번호 선택</option>
+                    </select>
+                </div>
+                
+                <button id="reset-btn" class="btn btn--secondary" disabled>
+                    초기화
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="main">
+        <div class="container">
+            <!-- Problem Display Area -->
+            <section class="problem-section">
+                <div class="problem-container">
+                    <!-- Loading State -->
+                    <div id="loading-spinner" class="loading-spinner hidden">
+                        <div class="spinner"></div>
+                        <p>문제를 불러오는 중...</p>
+                    </div>
+                    
+                    <!-- Error Message -->
+                    <div id="error-message" class="error-message hidden">
+                        <p class="error-message__text"></p>
+                        <button id="retry-btn" class="btn btn--primary">다시 시도</button>
+                    </div>
+                    
+                    <!-- Problem Image -->
+                    <div id="problem-image-container" class="problem-image-container hidden">
+                        <img id="problem-image" class="problem-image" alt="수학 문제" />
+                    </div>
+                    
+                    <!-- Solution Button -->
+                    <div class="solution-controls">
+                        <button id="solution-btn" class="btn btn--primary" disabled>
+                            해설 보기
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PDF Viewer Section -->
+            <section id="pdf-section" class="pdf-section hidden">
+                <div class="pdf-container">
+                    <div class="pdf-header">
+                        <h3 class="pdf-header__title">문제 해설</h3>
+                        <div class="pdf-controls">
+                            <button id="pdf-prev" class="btn btn--icon" title="이전 페이지">
+                                ←
+                            </button>
+                            <span id="pdf-page-info" class="pdf-page-info">
+                                <span id="pdf-current-page">1</span> / <span id="pdf-total-pages">1</span>
+                            </span>
+                            <button id="pdf-next" class="btn btn--icon" title="다음 페이지">
+                                →
+                            </button>
+                            <button id="pdf-zoom-out" class="btn btn--icon" title="축소">
+                                -
+                            </button>
+                            <button id="pdf-zoom-in" class="btn btn--icon" title="확대">
+                                +
+                            </button>
+                            <button id="pdf-close" class="btn btn--secondary">
+                                해설 닫기
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- PDF Canvas -->
+                    <div class="pdf-viewer">
+                        <canvas id="pdf-canvas" class="pdf-canvas"></canvas>
+                    </div>
+                    
+                    <!-- PDF Loading State -->
+                    <div id="pdf-loading" class="pdf-loading hidden">
+                        <div class="spinner"></div>
+                        <p>해설을 불러오는 중...</p>
+                    </div>
+                    
+                    <!-- PDF Error Message -->
+                    <div id="pdf-error" class="pdf-error hidden">
+                        <p class="error-message__text"></p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Debug Panel (only visible in debug mode) -->
+    <div id="debug-panel" class="debug-panel hidden">
+        <div class="debug-panel__header">
+            <h3>🔧 Debug Panel</h3>
+            <button id="debug-panel-close" class="debug-panel__close">×</button>
+        </div>
+        <div class="debug-panel__content">
+            <div class="debug-section">
+                <h4>Browser Compatibility</h4>
+                <button id="test-compatibility" class="btn btn--small">Run Compatibility Tests</button>
+                <button id="test-functionality" class="btn btn--small">Test Functionality</button>
+                <div id="compatibility-results" class="debug-results"></div>
+            </div>
+            
+            <div class="debug-section">
+                <h4>Debug Information</h4>
+                <button id="export-debug-info" class="btn btn--small">Export Debug Info</button>
+                <button id="clear-logs" class="btn btn--small">Clear Logs</button>
+                <div id="debug-stats" class="debug-stats"></div>
+            </div>
+            
+            <div class="debug-section">
+                <h4>Error Testing</h4>
+                <button id="test-image-error" class="btn btn--small">Test Image Error</button>
+                <button id="test-pdf-error" class="btn btn--small">Test PDF Error</button>
+                <button id="test-csv-error" class="btn btn--small">Test CSV Error</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Debug Toggle Button (only visible in debug mode) -->
+    <button id="debug-toggle" class="debug-toggle hidden">🐛</button>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer__text">
+                © 2025 수학 기출문제 풀이 웹앱. 학습 목적으로 제작되었습니다.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Modules -->
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
