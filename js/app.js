@@ -1478,13 +1478,18 @@ class App {
                 this.handleError(error, context);
             }, 100); // 100ms debounce
         };
-    } = document.getElementById('global-loading');
+    }
+
+    /**
+     * Show global loading state
+     * @param {string} message - Loading message
+     */
+    showGlobalLoading(message = '로딩 중...') {
+        const loadingElement = document.getElementById('global-loading');
         const loadingText = document.getElementById('global-loading-text');
         
-        if (loadingElement) {
-            if (loadingText) {
-                loadingText.textContent = message;
-            }
+        if (loadingElement && loadingText) {
+            loadingText.textContent = message;
             loadingElement.classList.remove('hidden');
         }
     }
