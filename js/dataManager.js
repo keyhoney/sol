@@ -148,7 +148,16 @@ export class DataManager {
                                     const questionNum = parseInt(question.toString().trim());
                                     
                                     if (isNaN(yearNum) || isNaN(monthNum) || isNaN(questionNum)) {
-                                        console.warn(`행 ${index + 1}: 숫자가 아닌 값이 있습니다 (학년도: ${year}, 시행월: ${month}, 문항번호: ${question})`);
+                                        // Check if this might be a header row
+                                        if (index === 0 && (
+                                            year.toString().includes('학년도') || 
+                                            month.toString().includes('시행월') || 
+                                            question.toString().includes('문항번호')
+                                        )) {
+                                            console.log(`행 ${index + 1}: 헤더 행을 건너뜁니다 (${year}, ${month}, ${question})`);
+                                        } else {
+                                            console.warn(`행 ${index + 1}: 숫자가 아닌 값이 있습니다 (학년도: ${year}, 시행월: ${month}, 문항번호: ${question})`);
+                                        }
                                         return false;
                                     }
                                     
